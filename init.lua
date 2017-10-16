@@ -28,12 +28,13 @@ local unique = luakit.unique
 -- @default `false`
 _M.open_links_in_new_window = false
 
+function _M.exec(id)
 if not unique then
     msg.verbose("luakit started with no-unique")
     return _M
 end
 
-unique.new("org.luakit")
+unique.new(id or "org.luakit")
 
 -- Check for a running luakit instance
 if unique.is_running() then
@@ -78,6 +79,8 @@ unique.add_signal("message", function (message, screen)
     w.win.screen = screen
     w.win.urgency_hint = true
 end)
+
+end
 
 return _M
 
